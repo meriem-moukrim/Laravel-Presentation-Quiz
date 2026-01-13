@@ -1,0 +1,122 @@
+[
+    {
+        "id": 1,
+        "question": "Quel est le fichier principal pour définir les routes web dans Laravel ?",
+        "options": [
+            "routes/api.php",
+            "routes/web.php",
+            "routes/console.php",
+            "app/Http/Routes.php"
+        ],
+        "answer": "routes/web.php",
+        "explanation": "Voir l'Introduction : Laravel centralise ses routes dans le dossier `routes/`. Pour les interfaces web classiques, c'est `routes/web.php`."
+    },
+    {
+        "id": 2,
+        "question": "Quelle méthode HTTP est utilisée pour récupérer des données ?",
+        "options": [
+            "POST",
+            "PUT",
+            "GET",
+            "DELETE"
+        ],
+        "answer": "GET",
+        "explanation": "Voir Partie 1 (Les verbes HTTP) : GET sert à demander une représentation d'une ressource."
+    },
+    {
+        "id": 3,
+        "question": "Comment définit-on un paramètre dynamique dans une route ?",
+        "options": [
+            "Route::get('/user/[id]')",
+            "Route::get('/user/{id}')",
+            "Route::get('/user/:id')",
+            "Route::get('/user/<id>')"
+        ],
+        "answer": "Route::get('/user/{id}')",
+        "explanation": "Voir Partie 1 (Paramètres de Route) : Les paramètres de route sont toujours entourés d'accolades `{}`."
+    },
+    {
+        "id": 4,
+        "question": "Quelle commande Artisan permet de créer un Middleware ?",
+        "options": [
+            "php artisan make:middleware",
+            "php artisan create:middleware",
+            "php artisan new:middleware",
+            "php artisan generate:middleware"
+        ],
+        "answer": "php artisan make:middleware",
+        "explanation": "Voir Partie 2 (Création de Middleware) : La commande standard est `php artisan make:middleware`."
+    },
+    {
+        "id": 5,
+        "question": "Où sont situés les contrôleurs dans l'architecture Laravel ?",
+        "options": [
+            "app/Controllers",
+            "database/Controllers",
+            "app/Http/Controllers",
+            "resources/Controllers"
+        ],
+        "answer": "app/Http/Controllers",
+        "explanation": "Voir Partie 3 (Scénarios) : Les contrôleurs sont le point d'entrée logique et se trouvent dans `app/Http/Controllers`."
+    },
+    {
+        "id": 6,
+        "question": "Quelle syntaxe Blade est utilisée pour afficher une variable sécurisée (échappée) ?",
+        "options": [
+            "{!! $variable !!}",
+            "{{ $variable }}",
+            "<?= $variable ?>",
+            "<% $variable %>"
+        ],
+        "answer": "{{ $variable }}",
+        "explanation": "Voir Partie 3 (Vues Blade) : La syntaxe `{{ }}` échappe automatiquement les données pour prévenir les attaques XSS."
+    },
+    {
+        "id": 7,
+        "question": "Quel est le rôle principal d'un Middleware ?",
+        "options": [
+            "Gérer la base de données",
+            "Filtrer les requêtes HTTP entrantes",
+            "Afficher la vue à l'utilisateur",
+            "Compiler les fichiers CSS"
+        ],
+        "answer": "Filtrer les requêtes HTTP entrantes",
+        "explanation": "Voir Partie 2 (Middleware) : Le middleware agit comme un mécanisme de filtrage et d'inspection des requêtes HTTP."
+    },
+    {
+        "id": 8,
+        "question": "Quelle méthode permet de donner un nom à une route ?",
+        "options": [
+            "->name('nom')",
+            "->label('nom')",
+            "->id('nom')",
+            "->call('nom')"
+        ],
+        "answer": "->name('nom')",
+        "explanation": "Voir Partie 1 (Nommer les routes) : Le chaînage de `->name()` permet de générer facilement des URL vers cette route."
+    },
+    {
+        "id": 9,
+        "question": "Dans quel dossier se trouvent les fichiers de migration de base de données ?",
+        "options": [
+            "app/Database/Migrations",
+            "database/migrations",
+            "storage/migrations",
+            "config/migrations"
+        ],
+        "answer": "database/migrations",
+        "explanation": "C'est une convention Laravel standard : tout ce qui touche à la structure de la BD est dans `database/migrations`."
+    },
+    {
+        "id": 10,
+        "question": "Quelle fonction globale est utilisée pour rediriger l'utilisateur ?",
+        "options": [
+            "go()",
+            "location()",
+            "redirect()",
+            "return()"
+        ],
+        "answer": "redirect()",
+        "explanation": "Voir Partie 3 (Redirections) : L'helper `redirect()` retourne une instance de redirection ou redirige directement."
+    }
+]
