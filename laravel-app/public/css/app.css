@@ -208,6 +208,8 @@ li code {
     height: auto;
     margin-bottom: 1.5rem;
     display: block;
+    margin-left: -4px;
+    /* Décaler légèrement à gauche */
 }
 
 .sidebar h3 {
