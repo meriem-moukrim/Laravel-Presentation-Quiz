@@ -139,6 +139,9 @@ laravel-app/
 
 ## 🛡️ Sécurité & Anti-Triche
 
+Le module de quiz intègre une protection via l'API `Page Visibility` du navigateur.
+*   **Event** : `visibilitychange`
+*   **Action** : Si `document.hidden` devient vrai pendant une partie active, le système disqualifie automatiquement le joueur.
 ---
 
 ## 👥 Auteurs
@@ -146,4 +149,4 @@ Ce projet a été développé et présenté par :
 *   **Rafiki Aymane** 🚀
 *   **Moukrim Meriem** ✨
 
-Fait avec ❤️ pour explorer la puissance de **Laravel 12**.
+Fait avec ❤️ pour explorer la puissance de **Laravel 12 (Routage et Middlewares)**.
