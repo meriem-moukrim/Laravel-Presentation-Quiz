@@ -2,6 +2,8 @@
 
 Bienvenue dans ce projet de démonstration interactif basé sur **Laravel 12**. Ce projet sert de support visuel et pratique pour comprendre les concepts fondamentaux du Routage et des Middlewares, accompagné d'un quiz interactif gamifié.
 
+![Capture d'écran de l'accueil](screenshots/homepage.png)
+
 ## 🌟 Fonctionnalités Principales
 
 ### 📚 Partie Cours
