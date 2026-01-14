@@ -7,71 +7,67 @@ use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Web Routes - Configuration du Routage
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group.
-|
+| Ce fichier définit toutes les "portes d'entrée" de l'application.
+| Chaque route lie une URL spécifique à une action dans un contrôleur.
+| Le routage est le premier pilier de Laravel pour diriger les requêtes.
 */
 
 // =========================================================================
-// 🏠 Home & Presentation Section
+// 🏠 Section Accueil & Présentation
 // =========================================================================
-// Displays the interactive course content loaded from JSON files.
+// Cette route gère l'affichage du cours interactif.
+// Elle appelle la méthode 'index' du PresentationController.
 Route::get('/', [PresentationController::class, 'index'])->name('home');
 
 
 // =========================================================================
-// 🔐 Authentication Routes (Laravel Socialite)
+// 🔐 Authentification via Google (Socialite)
 // =========================================================================
-// Handles Google OAuth validtion and user session management.
+// Utilise le package Socialite pour une connexion moderne sans mot de passe.
+// Le préfixe 'auth' permet d'organiser les URLs (ex: /auth/google).
 Route::prefix('auth')->name('auth.')->group(function () {
 
-    // Redirects user to Google's login page
+    // Redirige l'utilisateur vers la page de connexion de Google.
     Route::get('google', [AuthController::class, 'redirectToGoogle'])->name('google');
 
-    // Handles the callback from Google after successful login
+    // Récupère les informations de l'utilisateur renvoyées par Google.
     Route::get('google/callback', [AuthController::class, 'handleGoogleCallback'])->name('google.callback');
 });
 
-// Logs out the current user and invalidates the session
+// Route de déconnexion : détruit la session utilisateur.
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 
 // =========================================================================
-// 🎮 Quiz System Routes
+// 🎮 Système de Quiz - Logique Métier
 // =========================================================================
 
-// Public Entry Point: Displays the login prompt or redirect to game if auth
+// Point d'entrée du quiz : affiche soit le formulaire, soit le bouton de démarrage.
 Route::get('/quiz', [QuizController::class, 'index'])->name('quiz');
 
-// Fallback Route: Redirects unauthenticated users to the main quiz page
-// Required by the 'auth' middleware when a user tries to access protected pages.
+// Route 'login' : indispensable pour Laravel. 
+// Si un utilisateur non-connecté tente d'accéder à une page protégée, 
+// le middleware 'auth' le redirigera automatiquement ici.
 Route::get('/login', function () {
     return redirect()->route('quiz');
 })->name('login');
 
 
-// 🛡️ Protected Game Area
-// Middleware:
-// - 'auth': Ensures user is logged in.
-// - 'log.quiz': Custom middleware to log user activity/access.
+// 🛡️ Zone Sécurisée (Middleware)
+// Ici, on utilise un "Groupe de Middleware" :
+// 1. 'auth' : Vérifie que l'utilisateur est bien identifié.
+// 2. 'log.quiz' : Notre middleware personnalisé qui enregistre l'activité.
 Route::middleware(['auth', 'log.quiz'])->prefix('quiz')->name('quiz.')->group(function () {
 
-    // 🎮 The Game Interface
-    // Loads the quiz questions and displays the play view.
+    // L'interface de jeu : charge les questions et lance la partie.
     Route::get('/play', [QuizController::class, 'play'])->name('play');
 
-    // 💾 Score Submission API
-    // - Uses 'throttle:10,1' to limit requests (10 per minute) for security.
-    // - Validates and saves the score to the database.
-    // - Invalidates the leaderboard cache if a high score is updated.
+    // Sauvegarde du score : protégée par un 'throttle' (limiteur de débit).
+    // Empêche un utilisateur d'envoyer 1000 scores par seconde (protection anti-spam).
     Route::post('/score', [QuizController::class, 'storeScore'])->middleware('throttle:10,1')->name('score');
 
-    // 🏆 Leaderboard API
-    // Returns the top 5 players, utilized by the frontend via AJAX.
-    // Results are cached for performance.
+    // API Classement : renvoie les meilleurs scores en format JSON pour AJAX.
     Route::get('/leaderboard', [QuizController::class, 'leaderboard'])->name('leaderboard');
 });
